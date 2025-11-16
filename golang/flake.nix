@@ -10,11 +10,20 @@
       # use it here, and bind platform-specific packages to `pkgs`
       pkgs = nixpkgs.legacyPackages.${system};
       nativeBuildInputs = with pkgs; [ go ];
-      extraPackages = with pkgs; [ gopls delve ];
+      developmentPakcages = with pkgs; [ gopls delve ];
     in {
+
+      packages.${system}.default = pkgs.buildGoModule {
+        pname =;
+        version =;
+        src = ./.;
+        vendorHash = nixpkgs.lib.fakeHash;
+        # subPackages = [ "path1", "path2" ]
+        env = { CGO_ENABLED = 0; };
+      };
       devShells.${system}.default = pkgs.mkShell {
-        nativeBuildInputs = nativeBuildInputs;
-        packages = nixpkgs.lib.mkMerge [ extraPackages [ bashInteractive ] ];
+        packages = nativeBuildInputs ++ developmentPakcages
+          ++ [ pkgs.bashInteractive ];
       };
     };
 }
