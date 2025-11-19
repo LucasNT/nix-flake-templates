@@ -7,6 +7,10 @@
         description =
           "template for a golang project, add lsp, compiler and debugger";
       };
+      trivial = {
+        path = ./golang;
+        description = "Simple template to be used with nix develop";
+      };
     };
   };
 }
