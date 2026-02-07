@@ -1,7 +1,7 @@
 {
   description = "Trivial Template";
 
-  inputs = { nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05"; };
+  inputs = { nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.11"; };
 
   outputs = { self, nixpkgs }:
     let
